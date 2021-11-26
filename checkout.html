@@ -9,8 +9,31 @@
 
      <body>
          
-        <div id="app">
+        <div class= "background" id="app">
             <!-- Beginning -->
+
+            <header>
+                <button v-if="cartCheck" v-on:click='showCheckout'>{{ cartItemCount }} <span class="fas fa-cart-plus"></span> Checkout</button>
+                <button v-else disabled>{{ cartItemCount }} <span class="fas fa-cart-plus"></span> Checkout</button>
+
+           </header>
+
+           <main>
+            <div class = "filter" v-if='showProduct'>
+
+                <h1>Lessons Order</h1>
+                <p>Github page:   https://github.com/NabilY169/Coursework-1</p>
+
+                <!-- Search Bar Functionality -->
+                <div class="search-bar" > <span class  = "fas fa-search"></span> 
+                    <input type="text" v-model="searchText" @change="handleSearch" @keyUp="handleSearch">
+               </div>
+                
+
+
+
+           </main>
+           
         </div>
         
         
