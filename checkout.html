@@ -111,22 +111,28 @@
                      <h2 v-text="product.subject"></h2>
                 </div>
            </div>
-
-                
-
-
-
-           </main>
-           
-        </div>
+        </main>
+    </div>
         
         
         <script type="text/javascript">
         var webstore = new Vue({
             el: '#app',
             data: {
+                products: products,
+                filteredData: [],
+                cart: [],
+                currentSort: 'subject',
+                currentSortDir: 'asc',
+                showProduct: true,
+                cartTotalAmount: 0,
+                searchText: '',
+                order: {
+                     firstName: '',
+                    phoneNumber: ''
 
             }
+        },
         });
         
         </script>
