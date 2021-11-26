@@ -133,6 +133,14 @@
 
             }
         },
+        mounted() {
+            this.filteredData = this.products;
+        },
+        methods: {
+            handleChange() {
+                if (this.order.phoneNumber.length > 1) this.order.phoneNumber = null;
+            },
+
         });
         
         </script>
