@@ -20,33 +20,57 @@
 
            <main>
             <div class = "filter" v-if='showProduct'>
-
+                
                 <h1>Lessons Order</h1>
                 <p>Github page:   https://github.com/NabilY169/Coursework-1</p>
 
                 <!-- Search Bar Functionality -->
                 <div class="search-bar" > <span class  = "fas fa-search"></span> 
                     <input type="text" v-model="searchText" @change="handleSearch" @keyUp="handleSearch">
-               </div>
+                </div>
 
                <!-- Sorting location, price, subject radio buttons  -->
-               <p> Sort By:
+                <p> Sort By:
                 <input type="radio" id="location" value="location" v-model="currentSort">
                 <label for="location">Location</label>
                 <input type="radio" id="subject" value="subject" v-model="currentSort">
                 <label for="subject">Subject</label>
                 <input type="radio" id="price" value="price" v-model="currentSort">
                 <label for="price">Price</label>
-           </p>
+                </p>
 
-           <!-- Sorting Ascending & Descending -->
+               <!-- Sorting Ascending & Descending -->
      
-           <p> Sort Direction:
-            <input type="radio" id="asc" value="asc" v-model="currentSortDir">
-            <label for="asc">Ascending</label>
-            <input type="radio" id="dsc" value="dsc" v-model="currentSortDir">
-            <label for="dsc">Descending</label>
-       </p>
+                <p> Sort Direction:
+                <input type="radio" id="asc" value="asc" v-model="currentSortDir">
+                <label for="asc">Ascending</label>
+                <input type="radio" id="dsc" value="dsc" v-model="currentSortDir">
+                <label for="dsc">Descending</label>
+                </p>
+
+                <!-- Displaying lessons & data in HTML -->
+                         
+                <div class = "productcss" v-for="product in sortedProducts">
+                    <h2 v-text="product.subject"></h2>
+                    <figure>
+                         <img v-bind:src="product.image">
+                    </figure>
+                    <p>Location: {{ product.location }}</p>
+                    <p>Price: £{{ product.price }}</p>
+                    <p>Available stock: {{ product.availableInventory -cartCount(product.id) }}</p>
+
+                    <button v-on:click='addToCart(product)' v-if='canAddToCart(product)'>Add to cart</button>
+                    <button disabled="disabled" v-else>Add to cart</button>
+
+                    <span v-if='product.availableInventory === cartCount(product.id)'>All out!</span>
+                    <span v-else-if="product.availableInventory - cartCount(product.id) < 5">Only {{ product.availableInventory - cartCount(product.id) }} left!</span>
+                    <span v-else>Buy now!</span>
+
+                    <div>
+                         <span v-for='n in product.rating'>★ </span>
+                         <span v-for='n in 5-product.rating'>☆</span>
+                    </div>
+               </div>
 
                 
 
