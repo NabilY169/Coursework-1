@@ -71,6 +71,46 @@
                          <span v-for='n in 5-product.rating'>☆</span>
                     </div>
                </div>
+            </div>
+
+            <!-- Displaying information in the checkout page -->
+            <div v-else>
+                <button v-on:click="goBack()"> <span class ="fa-solid fa-square-caret-left"></span> Go Back</button> 
+                <h2>Checkout</h2>
+                <ul class="baseProduct" v-for="(lesson, key) in cart"> 
+                     <li>{{ lesson.amount }} {{ lesson.title }} £{{ lesson.price }}  </li>
+                      
+                     <figure>
+                          <img v-bind:src="lesson.image">
+                     </figure>
+
+                     <button v-on:click='cartUpdate(lesson)' v-if='canUpdateCart(lesson)'>+</button>
+                     <button disabled="disabled" v-else>Out of Stock</button>
+
+                     <button v-on:click='removeItemFromCart(lesson)'>-</button>
+                </ul>
+
+                <p>
+                     <strong>First Name:</strong>
+                     <input v-model.trim="order.firstName" />
+                </p>
+                <p>
+                     <strong>Phone Number:</strong>
+                     <input oninput="this.value = this.value.replace(/[^0-9.]/g, '')" v-model.trim="order.phoneNumber" @change="" />
+                </p>
+
+                <h2>Order Information</h2>
+                <p>First Name: {{ order.firstName }}</p>
+                <p>Phone Number: {{ order.phoneNumber }}</p>
+                
+                <button v-on:click="submitForm" v-if="fieldChecker && cartCheck">Place Order</button>
+                <button v-on:click="submitForm" v-else disabled>Place Order</button>
+
+                <div v-if='showProduct'>
+                     <div v-for="product in sortedProducts">
+                     <h2 v-text="product.subject"></h2>
+                </div>
+           </div>
 
                 
 
